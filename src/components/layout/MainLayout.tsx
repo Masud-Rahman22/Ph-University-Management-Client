@@ -1,66 +1,82 @@
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import { createElement } from "react";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  UserOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: createElement(icon),
-  label: `nav ${index + 1}`,
-}));
+    {
+        key: '1',
+        label: 'Dashboard'
+    },
+    {
+        key: '2',
+        label: 'Profile'
+    },
+    {
+        key: '2',
+        label: 'User Management',
+        children : [
+            {
+                key: '11',
+                label: 'Create Admin'
+            },
+            {
+                key: '21',
+                label: 'Create Student'
+            },
+        ]
+    },
+]
 
 const MainLayout = () => {
-  return (
+    return (
     <div>
-      <Layout>
+    <Layout style={{ height: "100vh" }}>
         <Sider
-          breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+        console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+        console.log(collapsed, type);
+        }}
         >
-          <div className="demo-logo-vertical" />
-          <Menu
+        <div style={{
+            color: "white",
+            height: "4rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+        }} >
+            <h1>Ph Uni</h1>
+        </div>
+        <Menu
             theme="dark"
             mode="inline"
             defaultSelectedKeys={["4"]}
             items={items}
-          />
+        />
         </Sider>
         <Layout>
-          <Header style={{ padding: 0 }} />
-          <Content style={{ margin: "24px 16px 0" }}>
+        <Header style={{ padding: 0 }} />
+        <Content style={{ margin: "24px 16px 0" }}>
             <div
-              style={{
+            style={{
                 padding: 24,
                 minHeight: 360,
-              }}
+            }}
             >
-              The main content should be here
+        The main content should be here
             </div>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
             Ant Design ©{new Date().getFullYear()} Created by Ant UED
-          </Footer>
+        </Footer>
         </Layout>
-      </Layout>
-      ;
+    </Layout>
+    ;
     </div>
-  );
+);
 };
 
 export default MainLayout;
