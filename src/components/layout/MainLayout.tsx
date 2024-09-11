@@ -8,6 +8,7 @@ const MainLayout = () => {
     return (
     <div>
     <Layout style={{ height: "100vh" }}>
+        {/* here sidebar */}
         <Sidebar></Sidebar>
         <Layout>
         <Header style={{ padding: 0 }} />
