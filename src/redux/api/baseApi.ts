@@ -13,6 +13,10 @@ const baseQuery =  fetchBaseQuery({
     }
 })
 
+const baseQueryWithRefreshToken = ()=> {
+
+}
+
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQuery,
