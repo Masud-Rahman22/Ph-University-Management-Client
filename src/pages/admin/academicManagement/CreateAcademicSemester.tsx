@@ -21,9 +21,10 @@ const nameOptions = [
 
 const CreateAcademicSemester = () => {
     const onSubmit : SubmitHandler<FieldValues> = (data)=>{
+      const name = nameOptions[Number(data?.name) - 1].label
         const semesterData = {
-          name: data.label,
-          code: data.value
+          name,
+          code: data?.name
         }
         console.log(semesterData)
     } 
