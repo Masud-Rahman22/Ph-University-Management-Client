@@ -45,7 +45,7 @@ import { toast } from 'sonner';
       });
   
       const data = await res.json();
-      console.log(data)
+      console.log(data.data)
   
       if (data?.data) {
         const user = (api.getState() as RootState).auth.user;

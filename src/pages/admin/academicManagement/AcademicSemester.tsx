@@ -5,16 +5,17 @@ import { TAcademicSemester } from "../../../types/academicManagement.type";
 export type TTableData = Pick<TAcademicSemester, "_id" | "name" | "year" | "endMonth" | "startMonth">
 
 const AcademicSemester = () => {
-  const { data: semesterData } = useGetAllSemestersQuery(undefined);
+  const { data: semesterData } = useGetAllSemestersQuery([{name:"year", value: "2030"}]);
   const tableData = semesterData?.data?.map(
     ({ _id, name, year, endMonth, startMonth }) => ({
+      key: _id,
       _id,
       name,
       year,
       endMonth,
       startMonth,
     })
-  );
+  )
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
