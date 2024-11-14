@@ -1,13 +1,14 @@
-import { Table, TableColumnsType, TableProps } from "antd";
+import { Button, Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
 import { TAcademicSemester } from "../../../types/academicManagement.type";
 import { useState } from "react";
+import { TQueryParam } from "../../../types";
 
 export type TTableData = Pick<TAcademicSemester, "_id" | "name" | "year" | "endMonth" | "startMonth">
 
 const AcademicSemester = () => {
-  const [params,setParams] = useState([]);
-  const { data: semesterData } = useGetAllSemestersQuery(params);
+  const [params,setParams] = useState<TQueryParam[] | undefined>(undefined);
+  const { data: semesterData , isFetching} = useGetAllSemestersQuery(params);
   const tableData = semesterData?.data?.data?.map(
     ({ _id, name, year, endMonth, startMonth }:TTableData) => ({
       key: _id,
@@ -20,6 +21,7 @@ const AcademicSemester = () => {
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
+      key: "name",
       dataIndex: "name",
       showSorterTooltip: { target: "full-header" },
       filters: [
@@ -39,6 +41,7 @@ const AcademicSemester = () => {
     },
     {
       title: "Year",
+      key: "year",
       dataIndex: "year",
       filters: [
         {
@@ -57,22 +60,31 @@ const AcademicSemester = () => {
     },
     {
       title: "Start Month",
+      key: "startMonth",
       dataIndex: "startMonth",
     },
     {
       title: "End Month",
+      key: "endMonth",
       dataIndex: "endMonth",
     },
+    {
+      title: "Action",
+      key: "x",
+      render : ()=>{
+        return <div><Button>Update</Button></div>
+      }
+    }
   ];
 
   const onChange: TableProps<TTableData>["onChange"] = (
-    pagination,
+    _pagination,
     filters,
-    sorter,
+    _sorter,
     extra
   ) => {
     if(extra.action=="filter"){
-      const queryParams = [];
+      const queryParams : TQueryParam[]= [];
 
       filters.name?.forEach((item)=>
         queryParams.push({name:"name",value:item})
@@ -88,6 +100,7 @@ const AcademicSemester = () => {
   return (
     <Table<TTableData>
       columns={columns}
+      loading={isFetching}
       dataSource={tableData}
       onChange={onChange}
       showSorterTooltip={{ target: "sorter-icon" }}
