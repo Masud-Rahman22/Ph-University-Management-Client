@@ -1,15 +1,16 @@
 import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
 import { TAcademicSemester } from "../../../types/academicManagement.type";
+import { useState } from "react";
 
 export type TTableData = Pick<TAcademicSemester, "_id" | "name" | "year" | "endMonth" | "startMonth">
 
 const AcademicSemester = () => {
-  const { data: semesterData } = useGetAllSemestersQuery([{name:"year", value: "2030"}]);
-  const tableData = semesterData?.data?.map(
-    ({ _id, name, year, endMonth, startMonth }) => ({
+  const [params,setParams] = useState([]);
+  const { data: semesterData } = useGetAllSemestersQuery(params);
+  const tableData = semesterData?.data?.data?.map(
+    ({ _id, name, year, endMonth, startMonth }:TTableData) => ({
       key: _id,
-      _id,
       name,
       year,
       endMonth,
@@ -23,26 +24,12 @@ const AcademicSemester = () => {
       showSorterTooltip: { target: "full-header" },
       filters: [
         {
-          text: "Joe",
-          value: "Joe",
+          text: "Autumn",
+          value: "Autumn",
         },
         {
-          text: "Jim",
-          value: "Jim",
-        },
-        {
-          text: "Submenu",
-          value: "Submenu",
-          children: [
-            {
-              text: "Green",
-              value: "Green",
-            },
-            {
-              text: "Black",
-              value: "Black",
-            },
-          ],
+          text: "Fall",
+          value: "Fall",
         },
       ],
     },
@@ -66,7 +53,15 @@ const AcademicSemester = () => {
     sorter,
     extra
   ) => {
-    console.log("params", pagination, filters, sorter, extra);
+    if(extra.action=="filter"){
+      const queryParams = [];
+
+      filters.name?.forEach((item)=>
+        queryParams.push({name:"name",value:item})
+      )
+
+      setParams(queryParams)
+    }
   };
 
   return (
