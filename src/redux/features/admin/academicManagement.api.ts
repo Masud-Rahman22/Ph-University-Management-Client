@@ -1,10 +1,8 @@
 import {
-  TAcademicDepartment,
-  TAcademicFaculty,
-  TAcademicSemester,
   TQueryParam,
   TResponseRedux,
 } from '../../../types';
+import { TAcademicDepartment, TAcademicFaculty, TAcademicSemester } from '../../../types/academicManagement.type';
 
 import { baseApi } from '../../api/baseApi';
 
