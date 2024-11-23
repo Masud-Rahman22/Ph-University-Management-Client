@@ -2,7 +2,7 @@ import {
   TQueryParam,
   TResponseRedux,
 } from '../../../types';
-import { TAcademicDepartment, TAcademicFaculty, TAcademicSemester } from '../../../types/academicManagement.type';
+import { TAcademicDepartment, TAcademicFaculty} from '../../../types/academicManagement.type';
 
 import { baseApi } from '../../api/baseApi';
 
@@ -24,12 +24,12 @@ const academicManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
-        return {
-          data: response.data,
-          meta: response.meta,
-        };
-      },
+      // transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
+      //   return {
+      //     data: response.data,
+      //     meta: response.meta,
+      //   };
+      // },
     }),
     addAcademicSemester: builder.mutation({
       query: (data) => ({

@@ -3,52 +3,52 @@ import PHInput from '../../../components/form/PHInput';
 import { Button, Col, Divider, Form, Input, Row } from 'antd';
 import PHSelect from '../../../components/form/PHSelect';
 import { bloodGroupOptions, genderOptions } from '../../../constants/global';
-import { useAddStudentMutation } from '../../../redux/features/admin/userManagement.api';
-import { useGetAllSemestersQuery } from '../../../redux/features/admin/academicManagement.api';
-import PHForm from '../../../components/form/PHFrom';
 import PHDatePicker from '../../../components/form/PHDatePicker';
-// import PHDatePicker from '../../../components/form/PHDatePicker';
+import {
+  useGetAcademicDepartmentsQuery,
+  useGetAllSemestersQuery,
+} from '../../../redux/features/admin/academicManagement.api';
+import { useAddStudentMutation } from '../../../redux/features/admin/userManagement.api';
+import PHForm from '../../../components/form/PHFrom';
 
+// const studentDummyData = {
+//   password: 'student123',
+//   student: {
+//     name: {
+//       firstName: 'I am ',
+//       middleName: 'Student',
+//       lastName: 'Number 1',
+//     },
+//     gender: 'male',
+//     dateOfBirth: '1990-01-01',
+//     bloodGroup: 'A+',
 
-const studentDummyData = {
-  password: 'student123',
-  student: {
-    name: {
-      firstName: 'I am ',
-      middleName: 'Student',
-      lastName: 'Number 1',
-    },
-    gender: 'male',
-    dateOfBirth: '1990-01-01',
-    bloogGroup: 'A+',
+//     email: 'student3@gmail.com',
+//     contactNo: '1235678',
+//     emergencyContactNo: '987-654-3210',
+//     presentAddress: '123 Main St, Cityville',
+//     permanentAddress: '456 Oak St, Townsville',
 
-    email: 'student3@gmail.com',
-    contactNo: '1235678',
-    emergencyContactNo: '987-654-3210',
-    presentAddress: '123 Main St, Cityville',
-    permanentAddress: '456 Oak St, Townsville',
+//     guardian: {
+//       fatherName: 'James Doe',
+//       fatherOccupation: 'Engineer',
+//       fatherContactNo: '111-222-3333',
+//       motherName: 'Mary Doe',
+//       motherOccupation: 'Teacher',
+//       motherContactNo: '444-555-6666',
+//     },
 
-    guardian: {
-      fatherName: 'James Doe',
-      fatherOccupation: 'Engineer',
-      fatherContactNo: '111-222-3333',
-      motherName: 'Mary Doe',
-      motherOccupation: 'Teacher',
-      motherContactNo: '444-555-6666',
-    },
+//     localGuardian: {
+//       name: 'Alice Johnson',
+//       occupation: 'Doctor',
+//       contactNo: '777-888-9999',
+//       address: '789 Pine St, Villageton',
+//     },
 
-    localGuardian: {
-      name: 'Alice Johnson',
-      occupation: 'Doctor',
-      contactNo: '777-888-9999',
-      address: '789 Pine St, Villageton',
-    },
-
-    admissionSemester: '65bb60ebf71fdd1add63b1c0',
-    academicDepartment: '65b4acae3dc8d4f3ad83e416',
-  },
-};
-
+//     admissionSemester: '65bb60ebf71fdd1add63b1c0',
+//     academicDepartment: '65b4acae3dc8d4f3ad83e416',
+//   },
+// };
 //! This is only for development
 //! Should be removed
 const studentDefaultValues = {
@@ -59,8 +59,8 @@ const studentDefaultValues = {
   },
   gender: 'male',
 
-  bloogGroup: 'A+',
-
+  bloodGroup: 'A+',
+  email: "masud24@gmail.com",
   contactNo: '1235678',
   emergencyContactNo: '987-654-3210',
   presentAddress: '123 Main St, Cityville',
@@ -82,8 +82,8 @@ const studentDefaultValues = {
     address: '789 Pine St, Villageton',
   },
 
-  admissionSemester: '65bb60ebf71fdd1add63b1c0',
-  academicDepartment: '65b4acae3dc8d4f3ad83e416',
+  admissionSemester: '668d0bb989a5ec0c6f02d3fd',
+  academicDepartment: '6694e84759a00f7af7ee9a47',
 };
 
 const CreateStudent = () => {
@@ -95,28 +95,35 @@ const CreateStudent = () => {
     useGetAllSemestersQuery(undefined);
 
   const { data: dData, isLoading: dIsLoading } =
-    // useGetAcademicDepartmentsQuery(undefined);
+    useGetAcademicDepartmentsQuery(undefined);
 
-  const semesterOptions = sData?.data?.map((item) => ({
+  const semesterOptions = sData?.data?.data?.map((item) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
   }));
+
+  console.log(semesterOptions)
 
   const departmentOptions = dData?.data?.map((item) => ({
     value: item._id,
     label: item.name,
   }));
 
+  console.log(departmentOptions)
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log(typeof(data.admissionSemester))
     const studentData = {
       password: 'student123',
       student: data,
     };
+    console.log(studentData)
 
     const formData = new FormData();
 
     formData.append('data', JSON.stringify(studentData));
     formData.append('file', data.image);
+    console.log(formData)
 
     addStudent(formData);
 
@@ -149,7 +156,7 @@ const CreateStudent = () => {
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <PHSelect
                 options={bloodGroupOptions}
-                name="bloogGroup"
+                name="bloodGroup"
                 label="Blood group"
               />
             </Col>
