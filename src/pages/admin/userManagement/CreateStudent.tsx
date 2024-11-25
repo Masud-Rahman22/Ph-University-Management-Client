@@ -112,7 +112,7 @@ const CreateStudent = () => {
   console.log(departmentOptions)
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(typeof(data.admissionSemester))
+    
     const studentData = {
       password: 'student123',
       student: data,
