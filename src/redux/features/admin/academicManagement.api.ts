@@ -1,7 +1,7 @@
 import {
   TAcademicDepartment,
   TAcademicFaculty,
-  TAcademicSemester,
+  // TAcademicSemester,
   TQueryParam,
   TResponseRedux,
 } from '../../../types';
@@ -26,12 +26,12 @@ const academicManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
-        return {
-          data: response.data,
-          meta: response.meta,
-        };
-      },
+      // transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
+      //   return {
+      //     data: response.data,
+      //     meta: response.meta,
+      //   };
+      // },
     }),
     addAcademicSemester: builder.mutation({
       query: (data) => ({

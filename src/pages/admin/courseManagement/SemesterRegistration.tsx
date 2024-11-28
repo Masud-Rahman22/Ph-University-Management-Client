@@ -19,7 +19,7 @@ const SemesterRegistration = () => {
 
   console.log(academicSemester)
 
-  const academicSemesterOptions = academicSemester?.data?.data?.map((item) => ({
+  const academicSemesterOptions = academicSemester?.data?.data?.map((item: { _id: any; name: any; year: any; }) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
   }));
