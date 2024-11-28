@@ -4,9 +4,8 @@ import {
   useGetAllCoursesQuery,
 } from '../../../redux/features/admin/courseManagement';
 import { useState } from 'react';
-import PHForm from '../../../components/form/PHForm';
+import PHForm from '../../../components/form/PHFrom';
 import PHSelect from '../../../components/form/PHSelect';
-import { useGetAcademicFacultiesQuery } from '../../../redux/features/admin/academicManagement.api';
 import { useGetAllFacultiesQuery } from '../../../redux/features/admin/userManagement.api';
 
 const Courses = () => {

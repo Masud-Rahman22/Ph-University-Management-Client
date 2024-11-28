@@ -1,5 +1,5 @@
 import { FieldValues, SubmitHandler } from 'react-hook-form';
-import PHForm from '../../../components/form/PHForm';
+import PHForm from '../../../components/form/PHFrom';
 import { Button, Col, Flex } from 'antd';
 import PHSelect from '../../../components/form/PHSelect';
 import { semesterStatusOptions } from '../../../constants/semester';
@@ -17,7 +17,9 @@ const SemesterRegistration = () => {
     { name: 'sort', value: 'year' },
   ]);
 
-  const academicSemesterOptions = academicSemester?.data?.map((item) => ({
+  console.log(academicSemester)
+
+  const academicSemesterOptions = academicSemester?.data?.data?.map((item) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
   }));

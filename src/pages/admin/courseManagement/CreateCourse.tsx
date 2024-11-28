@@ -1,5 +1,5 @@
 import { FieldValues, SubmitHandler } from 'react-hook-form';
-import PHForm from '../../../components/form/PHForm';
+import PHForm from '../../../components/form/PHFrom';
 import { Button, Col, Flex } from 'antd';
 import PHSelect from '../../../components/form/PHSelect';
 import { toast } from 'sonner';
