@@ -1,5 +1,5 @@
-import { Form, Select } from "antd";
-import { Controller } from "react-hook-form";
+import { Form, Select } from 'antd';
+import { Controller, useFormContext } from 'react-hook-form';
 
 type TPHSelectProps = {
   label: string;
@@ -9,19 +9,22 @@ type TPHSelectProps = {
 };
 
 const PHSelect = ({ label, name, options, disabled }: TPHSelectProps) => {
+  const { control } = useFormContext(); // Get control from FormProvider
+
   return (
     <Controller
       name={name}
-      render={({ field, fieldState: {error} }) => (
+      control={control} // Pass control
+      render={({ field, fieldState: { error } }) => (
         <Form.Item label={label}>
           <Select
-            style={{ width: "100%" }}
             {...field}
             options={options}
             size="large"
             disabled={disabled}
-            />
-            {error && <small style={{color: "red"}}>{error.message}</small>}
+            onChange={(value) => field.onChange(value)} // Ensure value is updated
+          />
+          {error && <small style={{ color: 'red' }}>{error.message}</small>}
         </Form.Item>
       )}
     />

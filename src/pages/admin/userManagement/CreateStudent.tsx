@@ -97,7 +97,7 @@ const CreateStudent = () => {
   const { data: dData, isLoading: dIsLoading } =
     useGetAcademicDepartmentsQuery(undefined);
 
-  const semesterOptions = sData?.data?.data?.map((item) => ({
+  const semesterOptions = sData?.data?.data?.map((item: { _id: any; name: any; year: any; }) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
   }));
