@@ -24,7 +24,6 @@ const SemesterRegistration = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading('Creating...');
-
     const semesterData = {
       ...data,
       minCredit: Number(data.minCredit),
