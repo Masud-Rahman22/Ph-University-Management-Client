@@ -4,7 +4,7 @@ import {
     TResponseRedux,
     TSemester,
   } from '../../../types';
-  import { baseApi } from '../../api/baseApi';
+import { baseApi } from '../../api/baseApi';
   
   const courseManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -24,7 +24,7 @@ import {
             params: params,
           };
         },
-        providesTags: ['semester'],
+        providesTags: ['semester'], // for caching
         transformResponse: (response: TResponseRedux<TSemester[]>) => {
           return {
             data: response.data,
