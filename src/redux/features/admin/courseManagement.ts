@@ -38,7 +38,7 @@ import { baseApi } from '../../api/baseApi';
           method: 'POST',
           body: data,
         }),
-        invalidatesTags: ['semester'],
+        invalidatesTags: ['semester'], // for caching
       }),
       updateRegisteredSemester: builder.mutation({
         query: (args) => ({
