@@ -33,7 +33,7 @@ const Courses = () => {
     {
       title: 'Action',
       key: 'x',
-      render: (item) => {
+      render: (item: any) => {
         return <AddFacultyModal facultyInfo={item} />;
       },
     },
@@ -71,7 +71,7 @@ const AddFacultyModal = ({ facultyInfo }) => {
     label: item.fullName,
   }));
 
-  const handleSubmit = (data) => {
+  const handleSubmit = (data: any) => {
     const facultyData = {
       courseId: facultyInfo.key,
       data,
