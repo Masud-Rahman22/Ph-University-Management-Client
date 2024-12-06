@@ -6,6 +6,7 @@ import { useGetAcademicFacultiesQuery } from '../../../redux/features/admin/acad
 // import PHSelectWithWatch from '../../../components/form/PHSelectWithWatch';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
+import PHSelectWithWatch from '../../../components/form/PHSelectWithWatch';
 
 const OfferCourse = () => {
   const [id, setId] = useState('');
@@ -27,12 +28,12 @@ const OfferCourse = () => {
     <Flex justify="center" align="center">
       <Col span={6}>
         <PHForm onSubmit={onSubmit}>
-          {/* <PHSelectWithWatch
+          <PHSelectWithWatch
             onValueChange={setId}
             label="Academic Semester"
             name="academicSemester"
             options={academicSemesterOptions}
-          /> */}
+          />
           <PHInput disabled={!id} type="text" name="test" label="Test" />
           <Button htmlType="submit">Submit</Button>
         </PHForm>
